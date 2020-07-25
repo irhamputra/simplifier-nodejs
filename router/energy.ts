@@ -23,6 +23,7 @@ router.get('/:zipCode', async (req, res, next) => {
       houseNumber,
       street,
       city,
+      customerType,
     } = req.query;
     const baseUrl = `${process.env.BASE_URL}${zipCode}`;
 
@@ -34,19 +35,19 @@ router.get('/:zipCode', async (req, res, next) => {
     if (houseNumber) {
       url = `${baseUrl}/city/${city}/street/${street}/hnr/${houseNumber}?primeTimeConsumption=${primaryUsage}${
         secondaryUsage ? `&secondaryTimeConsumption=${secondaryUsage}` : ''
-      }`;
+      }${customerType ? `&customerType=${customerType}` : ''}`;
     } else if (street) {
       url = `${baseUrl}/city/${city}/street/${street}?primeTimeConsumption=${primaryUsage}${
         secondaryUsage ? `&secondaryTimeConsumption=${secondaryUsage}` : ''
-      }`;
+      }${customerType ? `&customerType=${customerType}` : ''}`;
     } else if (city) {
       url = `${baseUrl}/city/${city}?primeTimeConsumption=${primaryUsage}${
         secondaryUsage ? `&secondaryTimeConsumption=${secondaryUsage}` : ''
-      }`;
+      }${customerType ? `&customerType=${customerType}` : ''}`;
     } else {
       url = `${baseUrl}?primeTimeConsumption=${primaryUsage}${
         secondaryUsage ? `&secondaryTimeConsumption=${secondaryUsage}` : ''
-      }`;
+      }${customerType ? `&customerType=${customerType}` : ''}`;
     }
 
     const { data } = await axios.get<Response>(url, { auth, cancelToken: source.token });
