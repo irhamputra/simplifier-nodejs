@@ -23,6 +23,8 @@ router.get('/:zipCode', async (req, res, next) => {
 
     return res.status(200).json({ data });
   } catch (e) {
+    if (axios.isCancel(e)) return source.cancel('Cancel by User');
+
     res.status(503).json({
       error: true,
       message: e.message,
