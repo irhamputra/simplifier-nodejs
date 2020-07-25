@@ -16,4 +16,8 @@ app.use(bodyParser.json());
 
 app.use('/api/v1', router);
 
+app.get('/', (_, res) => {
+  res.send(`<h1 style="font-family: Helvetica, sans-serif">You are good to go 🥳</h1>`);
+});
+
 app.listen(port, () => console.log(`Server running on port:${port}`));
