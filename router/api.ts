@@ -32,7 +32,7 @@ router.get('/:zipCode', async (req, res, next) => {
     cachedData = data;
     cachedTime = Date.now();
 
-    return res.status(200).json({ data });
+    return res.status(200).json(data);
   } catch (e) {
     if (axios.isCancel(e)) return source.cancel('Cancel by User');
 
