@@ -1,18 +1,15 @@
 import express from 'express';
 import axios, { AxiosBasicCredentials } from 'axios';
-import ResponseModel from '../models/response';
-import SuggestLocationModel from '../models/suggestLocation';
+import { Response } from '../models';
 
 const router = express.Router();
 const source = axios.CancelToken.source();
-
-type Response = typeof ResponseModel | typeof SuggestLocationModel;
 
 let cachedData: Response | null = null;
 let cachedTime: number;
 let url: string;
 
-router.get('/energy/:zipCode', async (req, res, next) => {
+router.get('/:zipCode', async (req, res, next) => {
   // TODO: change MemCache to Redis
   if (cachedTime && cachedTime > Date.now() - 30 * 1000) {
     return res.json(cachedData);

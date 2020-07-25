@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import router from './router/api';
+import routerEnergy from './router/energy';
+import routerGas from './router/gas';
 
 dotenv.config();
 
@@ -15,7 +16,8 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
-app.use('/api/v1', router);
+app.use('/api/v1/energy', routerEnergy);
+app.use('/api/v1/gas', routerGas);
 
 app.get('/', (_, res) => {
   res.send(`<h1 style="font-family: Helvetica, sans-serif">You are good to go 🥳</h1>`);
