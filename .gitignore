@@ -125,3 +125,5 @@ dist
 /yarn.lock
 
 .vercel
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/workspace.xml
