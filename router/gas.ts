@@ -3,7 +3,7 @@ import axios, { AxiosBasicCredentials } from 'axios';
 import { Response } from '../models';
 
 const router = express.Router();
-const source = axios.CancelToken.source();
+const { cancel, token } = axios.CancelToken.source();
 
 let cachedData: Response | null = null;
 let cachedTime: number;
@@ -41,19 +41,24 @@ router.get('/:zipCode', async (req, res, next) => {
       url = `${baseUrl}?primeTimeConsumption=${primaryUsage}${customerType ? `&customerType=${customerType}` : ''}`;
     }
 
-    const { data } = await axios.get<Response>(url, { auth, cancelToken: source.token });
+    const { data } = await axios.get<Response>(url, { auth, cancelToken: token });
 
     cachedData = data;
     cachedTime = Date.now();
 
     return res.status(200).json(data);
   } catch (e) {
-    if (axios.isCancel(e)) return source.cancel('Cancel by User');
+    const error = e as Error;
+    if (axios.isCancel(error)) return cancel('Cancel by User');
 
-    res.status(503).json({
+    const statusCode = parseInt(error.message.replace(/\D+/gi, ''));
+
+    res.status(statusCode).json({
       error: true,
-      message: e.message,
+      statusCode,
+      message: error.message,
     });
+
     return next(e);
   }
 });
