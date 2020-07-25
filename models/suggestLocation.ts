@@ -1,0 +1,25 @@
+export default {
+  timestamp: '2020-06-01T15:08:22.994',
+  message: 'Data found.',
+  success: true,
+  additional_data: {},
+  data: {
+    suggestLocationType: 'ORT_ORTSTEIL',
+    suggestLokation: [
+      'Bodelwitz',
+      'Döbritz',
+      'Langenorla',
+      'Moxa',
+      'Nimritz',
+      'Oberoppurg',
+      'Oppurg',
+      'Paska',
+      'Pößneck',
+      'Solkwitz',
+      'Wernburg',
+    ],
+    calculationResult: null,
+    unique: false,
+  },
+  error: null,
+};
