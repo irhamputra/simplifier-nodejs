@@ -8,7 +8,15 @@ const source = axios.CancelToken.source();
 
 type Response = typeof ResponseModel | typeof SuggestLocationModel;
 
+let cachedData: Response | {} = {};
+let cachedTime: number;
+
+// TODO: change MemCache to Redis
 router.get('/:zipCode', async (req, res, next) => {
+  if (cachedTime && cachedTime > Date.now() - 30 * 1000) {
+    return res.json(cachedData);
+  }
+
   try {
     const { zipCode } = req.params;
     const { primeTimeConsumption: usage } = req.query;
@@ -20,6 +28,9 @@ router.get('/:zipCode', async (req, res, next) => {
 
     const url = `${process.env.BASE_URL}${zipCode}?primeTimeConsumption=${usage}`;
     const { data } = await axios.get<Response>(url, { auth, cancelToken: source.token });
+
+    cachedData = data;
+    cachedTime = Date.now();
 
     return res.status(200).json({ data });
   } catch (e) {
