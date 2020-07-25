@@ -8,7 +8,7 @@ const source = axios.CancelToken.source();
 
 type Response = typeof ResponseModel | typeof SuggestLocationModel;
 
-let cachedData: Response | {} = {};
+let cachedData: Response | null = null;
 let cachedTime: number;
 
 // TODO: change MemCache to Redis
