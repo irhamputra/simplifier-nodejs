@@ -1,6 +1,6 @@
 import express from 'express';
 import axios, { AxiosBasicCredentials } from 'axios';
-import { Response } from '../models';
+import { Response } from '../models/Response';
 
 const router = express.Router();
 const { cancel, token } = axios.CancelToken.source();
@@ -22,7 +22,7 @@ router.get('/:zipCode', async (req, res, next) => {
 
     const auth: AxiosBasicCredentials = {
       username: process.env.USERNAME || '',
-      password: process.env.PASSWORD || '',
+      password: process.env.PASSWORD || ''
     };
 
     if (houseNumber) {
@@ -56,7 +56,7 @@ router.get('/:zipCode', async (req, res, next) => {
     res.status(statusCode).json({
       error: true,
       statusCode,
-      message: error.message,
+      message: error.message
     });
 
     return next(e);
