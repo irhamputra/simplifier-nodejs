@@ -25,7 +25,7 @@ router.get('/:zipCode', async (req, res, next) => {
       city,
       customerType
     } = req.query;
-    const baseUrl = `${process.env.BASE_URL}${zipCode}`;
+    const baseUrl = `${process.env.BASE_URL}energy/zipCode${zipCode}`;
 
     const auth: AxiosBasicCredentials = {
       username: process.env.USERNAME || '',
