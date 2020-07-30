@@ -8,7 +8,6 @@ import swaggerDocument from './swagger.json';
 
 import EnergyRoute from './router/energy';
 import GasRoute from './router/gas';
-import UserRoute from './router/user';
 
 dotenv.config();
 
@@ -21,7 +20,6 @@ app.use(bodyParser.json({ limit: '10kb', type: ['json', 'application/csp-report'
 
 app.use('/api/v1/energy', EnergyRoute);
 app.use('/api/v1/gas', GasRoute);
-app.use('/api/v1/user', UserRoute);
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.get('/', (_, res) => {
