@@ -1,0 +1,1221 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "NodeJS Simplifier Service",
+    "contact": {
+      "name": "GET AG",
+      "url": "https://www.get-ag.com",
+      "email": "support@get-ag.com"
+    },
+    "version": "1.0.0-SNAPSHOT"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4545",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/v1/energy/{zipCode}": {
+      "get": {
+        "tags": ["Endpoints"],
+        "operationId": "getLokationEnergyCalcZipcode",
+        "parameters": [
+          {
+            "name": "zipCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "primeTimeConsumption",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "secondaryTimeConsumption",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "street",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "houseNumber",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DefaultResponseLocationTariffCalcEnergyData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/gas/{zipCode}": {
+      "get": {
+        "tags": ["Endpoints"],
+        "operationId": "getLokationGasCalcZipcode",
+        "parameters": [
+          {
+            "name": "zipCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "primeTimeConsumption",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "secondaryTimeConsumption",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "street",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "houseNumber",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DefaultResponseLocationTariffCalcEnergyData"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Abgaben": {
+        "type": "object",
+        "properties": {
+          "sonstigeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "wert": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "BerechneteTarifAntwort": {
+        "type": "object",
+        "properties": {
+          "sonstigeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "fehlermeldung": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Meldung"
+            }
+          },
+          "warnung": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Meldung"
+            }
+          },
+          "antwortStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itag": {
+            "type": "string"
+          },
+          "ergebnisseGesamtAnzahl": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ergebnisContainer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TarifErgebnisContainer"
+            }
+          }
+        }
+      },
+      "BerechneteTarifeBAI": {
+        "type": "object",
+        "properties": {
+          "zertifikate": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Zertifikate"
+            }
+          },
+          "sonstigeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "gueltigVon": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "gueltigBis": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "bedingungID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bedingung": {
+            "type": "string"
+          },
+          "einheitID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "einheit": {
+            "type": "string"
+          },
+          "vertragslaufzeitID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vertragslaufzeit": {
+            "type": "string"
+          },
+          "oekostromAnteil": {
+            "type": "number",
+            "format": "double"
+          },
+          "wertNetto": {
+            "type": "number",
+            "format": "double"
+          },
+          "wertBrutto": {
+            "type": "number",
+            "format": "double"
+          },
+          "verbrauchVon": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "verbrauchBis": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preisgarantieBestandteileID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preisgarantieBestandteile": {
+            "type": "string"
+          },
+          "preisgarantieBis": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "preisgarantieFuerMonate": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "beschreibungstext": {
+            "type": "string"
+          },
+          "art": {
+            "type": "string"
+          },
+          "artID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxWertNetto": {
+            "type": "number",
+            "format": "double"
+          },
+          "maxWertBrutto": {
+            "type": "number",
+            "format": "double"
+          },
+          "maxWertEinheitID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "calcWertNetto": {
+            "type": "number",
+            "format": "double"
+          },
+          "calcWertBrutto": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "DateIdObj": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "listenWert": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalDate"
+            }
+          },
+          "wert": {
+            "$ref": "#/components/schemas/LocalDate"
+          }
+        }
+      },
+      "DefaultResponseLocationTariffCalcEnergyData": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "message": {
+            "type": "string"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "additional_data": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocationTariffCalcEnergyData"
+          },
+          "error": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "DoubleIdObj": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "listenWert": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "wert": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "EntgeltInformation": {
+        "type": "object",
+        "properties": {
+          "sonstigeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "entgeltID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entgeltRootID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entgeltName": {
+            "type": "string"
+          },
+          "gueltigBis": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "gueltigVon": {
+            "$ref": "#/components/schemas/LocalDate"
+          }
+        }
+      },
+      "Era": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "IdObjGruppe": {
+        "type": "object",
+        "properties": {
+          "intObj": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntIdObj"
+            }
+          },
+          "doubleObj": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DoubleIdObj"
+            }
+          },
+          "stringObj": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StringIdObj"
+            }
+          },
+          "dateObj": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DateIdObj"
+            }
+          }
+        }
+      },
+      "IntIdObj": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "listenWert": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "wert": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "IsoChronology": {
+        "type": "object",
+        "properties": {
+          "calendarType": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "KennzahlErgebnis": {
+        "type": "object",
+        "properties": {
+          "dynamischeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wert": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "LocalDate": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "month": {
+            "type": "string",
+            "enum": [
+              "JANUARY",
+              "FEBRUARY",
+              "MARCH",
+              "APRIL",
+              "MAY",
+              "JUNE",
+              "JULY",
+              "AUGUST",
+              "SEPTEMBER",
+              "OCTOBER",
+              "NOVEMBER",
+              "DECEMBER"
+            ]
+          },
+          "chronology": {
+            "$ref": "#/components/schemas/IsoChronology"
+          },
+          "dayOfWeek": {
+            "type": "string",
+            "enum": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
+          },
+          "era": {
+            "$ref": "#/components/schemas/Era"
+          },
+          "dayOfYear": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "leapYear": {
+            "type": "boolean"
+          },
+          "monthValue": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dayOfMonth": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "LocationTariffCalcEnergyData": {
+        "type": "object",
+        "properties": {
+          "suggestLocationType": {
+            "type": "string",
+            "enum": ["ZIPCODE", "CITY", "STREET", "HNR"]
+          },
+          "suggestLokation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "calculationResult": {
+            "$ref": "#/components/schemas/BerechneteTarifAntwort"
+          },
+          "unique": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MargeBerechnung": {
+        "type": "object",
+        "properties": {
+          "sonstigeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wertNetto": {
+            "type": "number"
+          },
+          "wertCtKWhNetto": {
+            "type": "number"
+          },
+          "wertBrutto": {
+            "type": "number"
+          },
+          "wertCtKWhBrutto": {
+            "type": "number"
+          }
+        }
+      },
+      "Marktrolle": {
+        "type": "object",
+        "properties": {
+          "sonstigeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "marktrolleID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "verbandsnummer": {
+            "type": "string"
+          },
+          "verbandsnummerKurz": {
+            "type": "string"
+          }
+        }
+      },
+      "Meldung": {
+        "type": "object",
+        "properties": {
+          "sonstigeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "beschreibung": {
+            "type": "string"
+          }
+        }
+      },
+      "NetzEntgeltBerechnung": {
+        "type": "object",
+        "properties": {
+          "abgaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Abgaben"
+            }
+          },
+          "steuern": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Steuern"
+            }
+          },
+          "entgeltInformation": {
+            "$ref": "#/components/schemas/EntgeltInformation"
+          },
+          "sonstigeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "apHT": {
+            "type": "number"
+          },
+          "apNT": {
+            "type": "number"
+          },
+          "entgeltFuerAbrechnung": {
+            "type": "number"
+          },
+          "entgeltFuerEinbauBetriebWartungMesstechnik": {
+            "type": "number"
+          },
+          "entgeltFuerMessungUndAblesung": {
+            "type": "number"
+          },
+          "entgeltZaehlerpreisAblesung": {
+            "type": "number"
+          },
+          "entgelttyp": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "gesamtpreis": {
+            "type": "number"
+          },
+          "grundpreis": {
+            "type": "number"
+          },
+          "kaHT": {
+            "type": "number"
+          },
+          "kaNT": {
+            "type": "number"
+          },
+          "leistungspreis": {
+            "type": "number"
+          },
+          "zaehlerart": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "spannungsEbeneEntnahme": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "spannungsEbeneMessung": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Steuern": {
+        "type": "object",
+        "properties": {
+          "sonstigeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "wert": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "StringIdObj": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "listenWert": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "wert": {
+            "type": "string"
+          }
+        }
+      },
+      "StrommixLight": {
+        "type": "object",
+        "properties": {
+          "dynamischeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "co2": {
+            "type": "number"
+          },
+          "erneuerbare": {
+            "type": "number"
+          },
+          "fossile": {
+            "type": "number"
+          },
+          "kernkraft": {
+            "type": "number"
+          },
+          "radioaktiv": {
+            "type": "number"
+          },
+          "stand": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "TarifErgebnis": {
+        "type": "object",
+        "properties": {
+          "informationen": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BerechneteTarifeBAI"
+            }
+          },
+          "boni": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BerechneteTarifeBAI"
+            }
+          },
+          "aufschlaege": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BerechneteTarifeBAI"
+            }
+          },
+          "strommixLight": {
+            "$ref": "#/components/schemas/StrommixLight"
+          },
+          "netzEntgeltBerechnung": {
+            "$ref": "#/components/schemas/NetzEntgeltBerechnung"
+          },
+          "margeBerechnung": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MargeBerechnung"
+            }
+          },
+          "kennzahlErgebnis": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KennzahlErgebnis"
+            }
+          },
+          "dynamischeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "gesamtpreisNetto": {
+            "type": "number"
+          },
+          "gesamtpreisOhneBoniNetto": {
+            "type": "number"
+          },
+          "gesamtpreisBrutto": {
+            "type": "number"
+          },
+          "gesamtpreisOhneBoniBrutto": {
+            "type": "number"
+          },
+          "versorgerName": {
+            "type": "string"
+          },
+          "tarifName": {
+            "type": "string"
+          },
+          "ersparnisNetto": {
+            "type": "number"
+          },
+          "ersparnisBrutto": {
+            "type": "number"
+          },
+          "tarifID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tarifRootID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "variantenID": {
+            "type": "string"
+          },
+          "tarifInfo": {
+            "type": "string"
+          },
+          "versorgerID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "gueltigVon": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "gueltigBis": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "arbeitspreisNetto": {
+            "type": "number"
+          },
+          "grundpreisNetto": {
+            "type": "number"
+          },
+          "arbeitspreisBrutto": {
+            "type": "number"
+          },
+          "grundpreisBrutto": {
+            "type": "number"
+          },
+          "isOekostromTarif": {
+            "type": "boolean"
+          },
+          "isVorkasseTarif": {
+            "type": "boolean"
+          },
+          "arbeitspreisHTCtKWhNetto": {
+            "type": "number"
+          },
+          "arbeitspreisNTCtKWhNetto": {
+            "type": "number"
+          },
+          "arbeitspreisHTCtKWhBrutto": {
+            "type": "number"
+          },
+          "arbeitspreisNTCtKWhBrutto": {
+            "type": "number"
+          },
+          "paketMehrverbrauchsPreisNetto": {
+            "type": "number"
+          },
+          "paketPreisNetto": {
+            "type": "number"
+          },
+          "paketMehrverbrauchsPreisBrutto": {
+            "type": "number"
+          },
+          "paketPreisBrutto": {
+            "type": "number"
+          },
+          "isPaketTarif": {
+            "type": "boolean"
+          },
+          "vertragslaufzeit": {
+            "type": "string"
+          },
+          "vertragsverlaengerungID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vertragsverlaengerung": {
+            "type": "string"
+          },
+          "kuendigungsfristID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "kuendigungsfrist": {
+            "type": "string"
+          },
+          "markenID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isGrundversorgungsTarif": {
+            "type": "boolean"
+          },
+          "isVergleichsTarif": {
+            "type": "boolean"
+          },
+          "paketMenge": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "anzeigeVon": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "anzeigeBis": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "vertragslaufzeitID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tarifCode": {
+            "type": "string"
+          },
+          "arbeitspreisEnergiepreisHTNetto": {
+            "type": "number"
+          },
+          "arbeitspreisEnergiepreisNTNetto": {
+            "type": "number"
+          },
+          "grundpreisEnergiepreisNetto": {
+            "type": "number"
+          },
+          "arbeitspreisEnergiepreisHTBrutto": {
+            "type": "number"
+          },
+          "arbeitspreisEnergiepreisNTBrutto": {
+            "type": "number"
+          },
+          "grundpreisEnergiepreisBrutto": {
+            "type": "number"
+          },
+          "arbeitspreisEnergiepreisHTCtKWhNetto": {
+            "type": "number"
+          },
+          "arbeitspreisEnergiepreisNTCtKWhNetto": {
+            "type": "number"
+          },
+          "arbeitspreisEnergiepreisHTCtKWhBrutto": {
+            "type": "number"
+          },
+          "arbeitspreisEnergiepreisNTCtKWhBrutto": {
+            "type": "number"
+          }
+        }
+      },
+      "TarifErgebnisContainer": {
+        "type": "object",
+        "properties": {
+          "versorgerInformation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersorgerInformation"
+            }
+          },
+          "dynamischeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "plz": {
+            "type": "string"
+          },
+          "ort": {
+            "type": "string"
+          },
+          "ergebnisseAnzahl": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ergebnisseSeiteAnzahl": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "uid": {
+            "type": "string"
+          },
+          "ergebnis": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TarifErgebnis"
+            }
+          }
+        }
+      },
+      "VersorgerInformation": {
+        "type": "object",
+        "properties": {
+          "marktrollen": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Marktrolle"
+            }
+          },
+          "sonstigeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "gebiet": {
+            "type": "string"
+          },
+          "versorgerID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "versorgerName": {
+            "type": "string"
+          }
+        }
+      },
+      "Zertifikate": {
+        "type": "object",
+        "properties": {
+          "sonstigeAngaben": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdObjGruppe"
+            }
+          },
+          "zertifikat": {
+            "type": "string"
+          },
+          "zertifikatID": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "DefaultResponseLocationTariffCalcGasData": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "message": {
+            "type": "string"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "additional_data": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocationTariffCalcGasData"
+          },
+          "error": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "LocationTariffCalcGasData": {
+        "type": "object",
+        "properties": {
+          "suggestLocationType": {
+            "type": "string",
+            "enum": ["ZIPCODE", "CITY", "STREET", "HNR"]
+          },
+          "suggestLokation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "calculationResult": {
+            "$ref": "#/components/schemas/BerechneteTarifAntwort"
+          },
+          "unique": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
