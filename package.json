@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node dist/server.js",
     "dev": "tsnd --respawn --transpile-only server.ts",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "nodemon": "nodemon server.ts"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -20,6 +21,7 @@
     "helmet": "^3.23.3",
     "joi": "^17.1.1",
     "jsonwebtoken": "^8.5.1",
+    "swagger-ui-express": "^4.1.4",
     "uuid": "^8.2.0"
   },
   "devDependencies": {
@@ -32,6 +34,7 @@
     "@types/helmet": "^0.0.47",
     "@types/joi": "^14.3.4",
     "@types/jsonwebtoken": "^8.5.0",
+    "@types/swagger-ui-express": "^4.1.2",
     "@types/uuid": "^8.0.0",
     "prettier": "^2.0.5",
     "ts-node": "^8.10.2",
@@ -42,8 +45,5 @@
     "printWidth": 120,
     "singleQuote": true,
     "trailingComma": "none"
-  },
-  "engines": {
-    "node": "12.x"
   }
 }

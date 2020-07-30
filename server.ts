@@ -3,28 +3,29 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import swaggerUI from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
 
 import EnergyRoute from './router/energy';
 import GasRoute from './router/gas';
 import UserRoute from './router/user';
-
-import { contentSecurityPolicy } from './config';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(helmet({ contentSecurityPolicy }));
+app.use(helmet());
 app.use(cors());
 app.use(bodyParser.json({ limit: '10kb', type: ['json', 'application/csp-report'] }));
 
 app.use('/api/v1/energy', EnergyRoute);
 app.use('/api/v1/gas', GasRoute);
 app.use('/api/v1/user', UserRoute);
+app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.get('/', (_, res) => {
-  res.send(`<h1 style="font-family: Helvetica, sans-serif">You are good to go 🥳</h1>`);
+  res.redirect('/swagger');
 });
 
 app.post('/report-violation', async (req, res) => {
