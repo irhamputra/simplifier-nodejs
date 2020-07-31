@@ -1,4 +1,4 @@
-import SuggestLocationModel from '../sampleData/suggestLocation';
+import LocationSuggestion from './LocationSuggestion';
 
 interface ResponseModel {
   timestamp: string;
@@ -10,8 +10,8 @@ interface ResponseModel {
 }
 
 interface Data {
-  suggestLocationType?: any;
-  suggestLokation?: any;
+  suggestLocationType?: string | null;
+  suggestLokation?: string[] | null;
   calculationResult: CalculationResult;
   unique: boolean;
 }
@@ -34,10 +34,10 @@ interface ErgebnisContainer {
   ergebnisseAnzahl: number;
   ergebnisseSeiteAnzahl: number;
   uid?: any;
-  ergebnis: Ergebni[];
+  ergebnis: Ergebnis[];
 }
 
-interface Ergebni {
+interface Ergebnis {
   informationen?: Informationen[];
   boni?: any;
   aufschlaege?: Aufschlaege[];
@@ -213,4 +213,4 @@ interface Marktrollen {
 
 interface Additionaldata {}
 
-export type Response = ResponseModel | typeof SuggestLocationModel;
+export type Response = ResponseModel | LocationSuggestion;
